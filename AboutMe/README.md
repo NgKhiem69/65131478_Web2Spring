@@ -1,65 +1,57 @@
-# 🌟 AboutMe Servlet Project
+# 👤 BÀI 1.3 - SERVLET ABOUT ME (JAVA SERVLET)
 
-Project **AboutMe** là một ứng dụng web Java đơn giản sử dụng **Servlet (Jakarta)** chạy trên **Apache Tomcat 10.1**, cho phép hiển thị trang giới thiệu thông tin cá nhân với giao diện đẹp, có ảnh đại diện hình tròn và bố cục 2 cột.
+## 📌 Mô tả
+Ứng dụng web hiển thị thông tin cá nhân sinh viên bằng Java Servlet.
 
----
+Khi client gửi GET request:
 
-## 📌 Chức năng
+http://localhost:8080/AboutMe
 
-- Client gửi GET request:
-http://localhost:8080/ViduGetPost/AboutMe
-
-
-- Server trả về trang giới thiệu cá nhân:
-- Ảnh đại diện hình tròn (bên trái)
-- Thông tin cá nhân (bên phải)
+Servlet trả về trang web giới thiệu bản thân gồm:
+- Ảnh đại diện (hình tròn)
+- Thông tin cá nhân
+- Giao diện chia 2 cột (ảnh bên trái – thông tin bên phải)
 
 ---
 
-## 🛠 Công nghệ sử dụng
-
+## 🚀 Công nghệ sử dụng
 - Java Servlet (Jakarta EE)
 - Apache Tomcat 10.1
 - HTML, CSS
-- Eclipse IDE
 
 ---
 
-
----
-
-## ▶ Cách chạy project
+## ▶️ Cách chạy chương trình
 
 1. Import project vào Eclipse  
-2. Cấu hình Tomcat 10.1  
-3. Chuột phải project → **Run As → Run on Server**  
-4. Mở trình duyệt và truy cập:
+2. Cấu hình Apache Tomcat  
+3. Chạy project trên server  
+4. Truy cập:
 
-http://localhost:8080/ViduGetPost/AboutMe
-
-
-## 🖼 Giao diện minh họa
-
-![Giao diện AboutMe](src/main/webapp/images/anhAboutme.png)
-
+http://localhost:8080/AboutMe
 
 ---
 
-## ✨ Mô tả giao diện
+## 📝 Chức năng chính
 
-- Nền gradient hiện đại  
-- Thẻ (card) bo góc, có bóng đổ  
-- Ảnh đại diện bo tròn  
-- Bố cục 2 cột rõ ràng  
-
----
-
-## 👤 Tác giả
-
-- Họ tên: Nguyễn Gia Khiêm  
-- Lớp: 65.CNTT_CLC  
-- Email: gk699488@gmail.com  
+- Hiển thị ảnh cá nhân  
+- Hiển thị họ tên, MSSV, lớp, sở thích  
+- Giao diện thân thiện, dễ nhìn  
 
 ---
 
+## 📷 Giao diện minh họa
 
+![Giao diện AboutMe](images/anhAboutme.png)
+
+---
+
+## 👨‍🎓 Sinh viên thực hiện
+
+Họ tên: Nguyễn Gia Khiêm  
+
+MSSV: 65131478  
+
+Lớp: 65.CNTT_CLC  
+
+---
