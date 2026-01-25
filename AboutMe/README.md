@@ -42,7 +42,8 @@ http://localhost:8080/AboutMe
 
 ## 📷 Giao diện minh họa
 
-![Giao diện AboutMe](images/anhAboutme.png)
+![Giao diện AboutMe](src/main/webapp/images/anhAboutme.png)
+
 
 ---
 
