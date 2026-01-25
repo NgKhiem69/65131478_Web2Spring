@@ -35,8 +35,8 @@ public class HelloGet extends HttpServlet {
     }
 }
 ```
-📌 Bài 1.2 – Servlet doPOST
-🎯 Mục tiêu
+## 📌 Bài 1.2 – Servlet doPOST
+### 🎯 Mục tiêu
 
 Gửi dữ liệu từ form HTML bằng phương thức POST và hiển thị kết quả.
 
