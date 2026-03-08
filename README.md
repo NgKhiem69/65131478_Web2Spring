@@ -17,7 +17,7 @@ Sử dụng **Java Servlet + Apache Tomcat**
 
 > Mỗi bài tập được đặt trong một thư mục riêng, có README mô tả chi tiết.
 
-### ✅ Chương 1: Servlet cơ bản
+### ✅ TH 1: Servlet cơ bản
 
 | STT | Tên bài | Mô tả | Thư mục |
 |----|--------|------|--------|
@@ -27,7 +27,13 @@ Sử dụng **Java Servlet + Apache Tomcat**
 
 ---
 
+### ✅ TH 2: JSP cơ bản
 
+| STT | Tên bài | Mô tả | Thư mục |
+|----|--------|------|--------|
+| 2.1 | Hello JSP | Hiển thị dữ liệu động với JSP | HelloJSP |
+| 2.2 | Scriptlet Demo | Thực hành JSP Declaration, Scriptlet, Expression | HelloJSP |
+| 2.3 | Login JSP | Form đăng nhập và xử lý bằng JSP | HelloJSP |
 
 ---
 
@@ -40,24 +46,6 @@ Sử dụng **Java Servlet + Apache Tomcat**
 
 ---
 
-## ▶️ Cách chạy bài tập
-
-1. Clone repo  
-2. Import project vào Eclipse  
-3. Cấu hình Tomcat  
-4. Run on Server  
-5. Truy cập theo README của từng bài  
-
----
-
-## 📂 DANH SÁCH BÀI TẬP
-
-> Mỗi bài tập được đặt trong một thư mục riêng, có README mô tả chi tiết.
-
----
-
-### ✅ Chương 1: Servlet cơ bản
-
 ### 🔹 Bài 1.1 & 1.2 – HelloServlet, GET & POST
 Thư mục: `getpost`  
 👉 Chi tiết: [getpost/README.md](getpost/README.md)
@@ -69,7 +57,6 @@ Thư mục: `AboutMe`
 👉 Chi tiết: [AboutMe/README.md](AboutMe/README.md)
 
 **Demo giao diện:**
-
 
 ![AboutMe Demo](AboutMe/src/main/webapp/images/anhAboutme.png)
 
@@ -85,5 +72,21 @@ Thư mục: `BMI`
 ![BMI Form](BMI/images/bmiform.png)
 ![BMI Result](BMI/images/bmiresult.png)
 
+---
 
+### 🔹 Bài 2 – JSP Basic & Login Demo
 
+Thư mục: `HelloJSP`  
+👉 Chi tiết: [HelloJSP/README.md](HelloJSP/README.md)
+
+**Demo giao diện:**
+
+### Trang Login
+
+![Login Demo](HelloJSP/src/main/webapp/Image/Screenshot%202026-02-04%20153409.png)
+
+### Trang User Profile
+
+![User Profile Demo](HelloJSP/src/main/webapp/Image/Screenshot%202026-02-04%20153502.png)
+
+---
