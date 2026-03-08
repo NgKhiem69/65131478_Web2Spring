@@ -54,11 +54,11 @@ Kết quả:
 
 ### Trang Login
 
-![Login Demo](Image/Screenshot2026-02-0453409.png)
+![Login Demo](src/main/webapp/Image/Screenshot%202026-02-04%20153409.png)
 
 ### Trang User Profile
 
-![User Profile Demo](Image/Screenshot2026-02-04153502.png)
+![User Profile Demo](src/main/webapp/Image/Screenshot%202026-02-04%20153502.png)
 
 ---
 
