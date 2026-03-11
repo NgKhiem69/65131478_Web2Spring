@@ -13,6 +13,6 @@ public class SinhVienController {
         model.addAttribute("namsinh", "2005");
         model.addAttribute("gioitinh", "Nam");
         
-        return "sinhVienView";
+        return "view";
 	}
 }
