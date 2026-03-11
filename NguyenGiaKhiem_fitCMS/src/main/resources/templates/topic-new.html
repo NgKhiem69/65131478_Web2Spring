@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Add Topic</title>
+</head>
+<body>
+
+<h2>Add New Topic</h2>
+
+<form action="/topic/save" method="post">
+
+<p>Id</p>
+<input type="text" name="id">
+
+<p>Topic Name</p>
+<input type="text" name="topicName">
+
+<p>Description</p>
+<input type="text" name="topicDescription">
+
+<p>Supervisor Id</p>
+<input type="text" name="supervisorId">
+
+<p>Topic Type</p>
+<input type="text" name="topicType">
+
+<br><br>
+
+<button type="submit">Save</button>
+
+</form>
+
+</body>
+</html>

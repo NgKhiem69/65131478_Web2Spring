@@ -1,153 +1,236 @@
 <!DOCTYPE html>
 <html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - CV Sinh Viên</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body {
-            font-family: Arial, sans-serif;
-            display: grid;
-            grid-template-areas: 
-                "header header"
-                "sidebar content"
-                "footer footer";
-            grid-template-rows: 60px 1fr 40px;
-            grid-template-columns: 250px 1fr;
-            min-height: 100vh;
-        }
+<title>Dashboard - CV Sinh Viên</title>
 
-        /* Phần Header */
-        header {
-            grid-area: header;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #333;
-            padding: 0 20px;
-        }
+<style>
 
-        .logo {
-            color: #d32f2f;
-            font-weight: bold;
-            font-size: 14px;
-        }
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
 
-        .logo span {
-            color: #1976d2;
-            font-size: 12px;
-        }
+body{
+font-family:Arial,sans-serif;
+display:grid;
+grid-template-areas:
+"header header"
+"sidebar content"
+"footer footer";
+grid-template-rows:60px 1fr 40px;
+grid-template-columns:250px 1fr;
+min-height:100vh;
+}
 
-        .user-info {
-            font-size: 16px;
-        }
+/* HEADER */
 
-        /* Phần Sidebar (Menu trái) */
-        aside {
-            grid-area: sidebar;
-            border-right: 2px solid #333;
-        }
+header{
+grid-area:header;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:2px solid #333;
+padding:0 20px;
+}
 
-        aside ul {
-            list-style-type: none;
-        }
+.logo{
+color:#d32f2f;
+font-weight:bold;
+font-size:14px;
+}
 
-        aside ul li {
-            border-bottom: 1px solid #333;
-            padding: 12px 15px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+.logo span{
+color:#1976d2;
+font-size:12px;
+}
 
-        aside ul li.active {
-            font-weight: bold;
-        }
+.user-info{
+font-size:16px;
+}
 
-        /* Phần Nội dung chính (Content) */
-        main {
-            grid-area: content;
-            background-color: #f5f5f5;
-            padding: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+/* SIDEBAR */
 
-        .cv-card {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 500px;
-        }
+aside{
+grid-area:sidebar;
+border-right:2px solid #333;
+}
 
-        .cv-card h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
+aside ul{
+list-style:none;
+}
 
-        .cv-card p {
-            font-size: 18px;
-            margin-bottom: 10px;
-            line-height: 1.5;
-        }
+aside ul li{
+border-bottom:1px solid #333;
+padding:12px 15px;
+font-size:16px;
+}
 
-        .cv-card strong {
-            display: inline-block;
-            width: 120px;
-        }
+aside ul li a{
+text-decoration:none;
+color:black;
+}
 
-        /* Phần Footer */
-        footer {
-            grid-area: footer;
-            border-top: 2px solid #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 14px;
-        }
-    </style>
+aside ul li a:hover{
+font-weight:bold;
+}
+
+/* CONTENT */
+
+main{
+grid-area:content;
+background:#f5f5f5;
+padding:30px;
+display:flex;
+justify-content:center;
+align-items:flex-start;
+}
+
+.cv-card{
+background:white;
+padding:30px;
+border-radius:8px;
+box-shadow:0 4px 8px rgba(0,0,0,0.1);
+width:100%;
+max-width:800px;
+}
+
+.cv-card h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+/* TABLE */
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+table th,table td{
+border:1px solid #333;
+padding:8px;
+text-align:center;
+}
+
+/* FOOTER */
+
+footer{
+grid-area:footer;
+border-top:2px solid #333;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:14px;
+}
+
+</style>
+
 </head>
+
 <body>
 
-    <header>
-        <div class="logo">
-            <span>TRƯỜNG ĐẠI HỌC NHA TRANG</span><br>
-            KHOA CÔNG NGHỆ THÔNG TIN
-        </div>
-        <div class="user-info">
-            [<span th:text="${ten}">UserName</span>]
-        </div>
-    </header>
+<header>
 
-    <aside>
-        <ul>
-            <li class="active">Dasdboard</li>
-            <li>Topic -List</li>
-            <li>Topic -Addnew</li>
-            <li>Student -List</li>
-            <li>Student -Addnew</li>
-        </ul>
-    </aside>
+<div class="logo">
+<span>TRƯỜNG ĐẠI HỌC NHA TRANG</span><br>
+KHOA CÔNG NGHỆ THÔNG TIN
+</div>
 
-    <main>
-   
+<div class="user-info">
+[<span th:text="${ten}">UserName</span>]
+</div>
 
-       
+</header>
 
-    </main>
 
-    <footer>
-        &copy;2026 by <span th:text="${ten}"> Student Name</span> – FIT.NTU
-    </footer>
+<aside>
+
+<ul>
+
+<li>
+<a th:href="@{/dashboard}">Dashboard</a>
+</li>
+
+<li>
+<a th:href="@{/topic/all}">Topic - List</a>
+</li>
+
+<li>
+<a th:href="@{/topic/new}">Topic - Addnew</a>
+</li>
+
+<li>
+<a href="#">Student - List</a>
+</li>
+
+<li>
+<a href="#">Student - Addnew</a>
+</li>
+
+</ul>
+
+</aside>
+
+
+<main>
+
+<div class="cv-card">
+
+<h2>Topic List</h2>
+
+<a th:href="@{/topic/new}">Add New Topic</a>
+
+<br><br>
+
+<table>
+
+<tr>
+<th>Id</th>
+<th>topicName</th>
+<th>supervisorId</th>
+<th>topicType</th>
+<th>view</th>
+<th>edit</th>
+<th>delete</th>
+</tr>
+
+<tr th:each="t : ${topics}">
+
+<td th:text="${t.id}"></td>
+<td th:text="${t.topicName}"></td>
+<td th:text="${t.supervisorId}"></td>
+<td th:text="${t.topicType}"></td>
+
+<td>
+<a th:href="@{/topic/view/{id}(id=${t.id})}">view</a>
+</td>
+
+<td>
+<a th:href="@{/topic/new}">edit</a>
+</td>
+
+<td>
+<a th:href="@{/topic/delete/{id}(id=${t.id})}">delete</a>
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</main>
+
+
+<footer>
+
+©2026 by <span th:text="${ten}">Student Name</span> – FIT.NTU
+
+</footer>
 
 </body>
 </html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Topic List</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f9;
+padding:40px;
+}
+
+/* tiêu đề */
+
+h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+/* nút add */
+
+.add-btn{
+display:inline-block;
+padding:10px 15px;
+background:#2ecc71;
+color:white;
+text-decoration:none;
+border-radius:5px;
+margin-bottom:20px;
+}
+
+.add-btn:hover{
+background:#27ae60;
+}
+
+/* bảng */
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+th{
+background:#3498db;
+color:white;
+padding:10px;
+}
+
+td{
+padding:10px;
+text-align:center;
+border-bottom:1px solid #ddd;
+}
+
+/* hover */
+
+tr:hover{
+background:#f1f1f1;
+}
+
+/* link */
+
+a{
+text-decoration:none;
+color:#2980b9;
+font-weight:bold;
+}
+
+a:hover{
+color:#e74c3c;
+}
+
+</style>
+
+</head>
+<body>
+
+<h2>Topic List</h2>
+
+<a class="add-btn" href="/topic/new">Add New Topic</a>
+
+<table>
+
+<tr>
+<th>Id</th>
+<th>topicName</th>
+<th>supervisorId</th>
+<th>topicType</th>
+<th>view</th>
+<th>edit</th>
+<th>delete</th>
+</tr>
+
+<tr th:each="t : ${topics}">
+
+<td th:text="${t.id}"></td>
+<td th:text="${t.topicName}"></td>
+<td th:text="${t.supervisorId}"></td>
+<td th:text="${t.topicType}"></td>
+
+<td>
+<a th:href="@{/topic/view/{id}(id=${t.id})}">View</a>
+</td>
+
+<td>
+<a th:href="@{/topic/new}">Edit</a>
+</td>
+
+<td>
+<a th:href="@{/topic/delete/{id}(id=${t.id})}">Delete</a>
+</td>
+
+</tr>
+
+</table>
+
+</body>
+</html>
