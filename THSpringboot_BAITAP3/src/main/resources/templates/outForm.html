@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kết quả</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .result-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .result-container h2 {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 25px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .info-row:nth-last-of-type(1) {
+            border-bottom: none;
+            margin-bottom: 25px;
+        }
+
+        .info-label {
+            color: #555555;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: #333333;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .back-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: #4a90e2;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: #357abd;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="result-container">
+        <h2>THÔNG TIN ĐÃ NHẬN</h2>
+
+        <div class="info-row">
+            <span class="info-label">MSSV:</span>
+            <span class="info-value" th:text="${mssv}"></span>
+        </div>
+        
+        <div class="info-row">
+            <span class="info-label">Họ tên:</span>
+            <span class="info-value" th:text="${hoten}"></span>
+        </div>
+        
+        <div class="info-row">
+            <span class="info-label">Năm sinh:</span>
+            <span class="info-value" th:text="${namsinh}"></span>
+        </div>
+        
+        <div class="info-row">
+            <span class="info-label">Giới tính:</span>
+            <span class="info-value" th:text="${gioitinh}"></span>
+        </div>
+
+        <a href="/" class="back-btn">Quay lại</a>
+    </div>
+
+</body>
+</html>
