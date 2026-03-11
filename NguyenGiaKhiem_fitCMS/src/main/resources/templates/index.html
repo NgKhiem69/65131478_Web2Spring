@@ -1,202 +1,170 @@
 <!DOCTYPE html>
 <html lang="vi" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-<meta charset="UTF-8">
-<title>Dashboard</title>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-<style>
+        body {
+            font-family: Arial, sans-serif;
+            display: grid;
+            grid-template-areas:
+                "header header"
+                "sidebar content"
+                "footer footer";
+            grid-template-rows: 60px 1fr 40px;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
 
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-}
+        header {
+            grid-area: header;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #333;
+            padding: 0 20px;
+        }
 
-body{
-font-family:Arial;
-display:grid;
-grid-template-areas:
-"header header"
-"sidebar content"
-"footer footer";
-grid-template-rows:60px 1fr 40px;
-grid-template-columns:250px 1fr;
-min-height:100vh;
-}
+        .logo {
+            color: #d32f2f;
+            font-weight: bold;
+            font-size: 14px;
+        }
 
-header{
-grid-area:header;
-display:flex;
-justify-content:space-between;
-align-items:center;
-border-bottom:2px solid #333;
-padding:0 20px;
-}
+        .logo span {
+            color: #1976d2;
+            font-size: 12px;
+        }
 
-.logo{
-color:#d32f2f;
-font-weight:bold;
-font-size:14px;
-}
+        aside {
+            grid-area: sidebar;
+            border-right: 2px solid #333;
+        }
 
-.logo span{
-color:#1976d2;
-font-size:12px;
-}
+        aside ul {
+            list-style: none;
+        }
 
-aside{
-grid-area:sidebar;
-border-right:2px solid #333;
-}
+        aside ul li {
+            border-bottom: 1px solid #333;
+            padding: 12px 15px;
+        }
 
-aside ul{
-list-style:none;
-}
+        aside a {
+            text-decoration: none;
+            color: black;
+            display: block;
+        }
 
-aside ul li{
-border-bottom:1px solid #333;
-padding:12px 15px;
-}
+        main {
+            grid-area: content;
+            background: #f5f5f5;
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+        }
 
-aside a{
-text-decoration:none;
-color:black;
-display:block;
-}
+        .cv-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 700px;
+        }
 
-main{
-grid-area:content;
-background:#f5f5f5;
-padding:30px;
-display:flex;
-justify-content:center;
-}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px; /* Thêm chút khoảng cách ở trên bảng */
+        }
 
-.cv-card{
-background:white;
-padding:30px;
-border-radius:8px;
-box-shadow:0 4px 8px rgba(0,0,0,0.1);
-width:100%;
-max-width:700px;
-}
+        th, td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: center;
+        }
 
-table{
-width:100%;
-border-collapse:collapse;
-}
-
-th,td{
-border:1px solid #333;
-padding:8px;
-text-align:center;
-}
-
-footer{
-grid-area:footer;
-border-top:2px solid #333;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:14px;
-}
-
-</style>
-
+        footer {
+            grid-area: footer;
+            border-top: 2px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
+    <header>
+        <div class="logo">
+            <span>TRƯỜNG ĐẠI HỌC NHA TRANG</span><br>
+            KHOA CÔNG NGHỆ THÔNG TIN
+        </div>
+        <div>
+            [<span th:text="${ten}">UserName</span>]
+        </div>
+    </header>
 
-<div class="logo">
-<span>TRƯỜNG ĐẠI HỌC NHA TRANG</span><br>
-KHOA CÔNG NGHỆ THÔNG TIN
-</div>
+    <aside>
+        <ul>
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/topic/all">Topic - List</a></li>
+            <li><a href="/topic/new">Topic - Addnew</a></li>
+            <li>Student - List</li>
+            <li>Student - Addnew</li>
+        </ul>
+    </aside>
 
-<div>
-[<span th:text="${ten}">UserName</span>]
-</div>
+    <main>
+        <div class="cv-card">
+            <h2>Topic List</h2>
+            <br>
+            <a th:href="@{/topic/new}">Add New Topic</a>
 
-</header>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Topic Name</th>
+                        <th>Supervisor Id</th>
+                        <th>Topic Type</th>
+                        <th>View</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="t : ${topics}">
+                        <td th:text="${t.id}"></td>
+                        <td th:text="${t.topicName}"></td>
+                        <td th:text="${t.supervisorId}"></td>
+                        <td th:text="${t.topicType}"></td>
+                        <td>
+                            <a th:href="@{/topic/view/{id}(id=${t.id})}">view</a>
+                        </td>
+                        <td>
+                            <a th:href="@{/topic/new}">edit</a>
+                        </td>
+                        <td>
+                            <a th:href="@{/topic/delete/{id}(id=${t.id})}">delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
 
-
-<aside>
-
-<ul>
-
-<li><a href="/">Dashboard</a></li>
-
-<li><a href="/topic/all">Topic - List</a></li>
-
-<li><a href="/topic/new">Topic - Addnew</a></li>
-
-<li>Student - List</li>
-
-<li>Student - Addnew</li>
-
-</ul>
-
-</aside>
-
-
-<main>
-
-<div class="cv-card">
-
-<h2>Topic List</h2>
-
-<a th:href="@{/topic/new}">Add New Topic</a>
-
-<br><br>
-
-<table>
-
-<tr>
-<th>Id</th>
-<th>topicName</th>
-<th>supervisorId</th>
-<th>topicType</th>
-<th>view</th>
-<th>edit</th>
-<th>delete</th>
-</tr>
-
-<tr th:each="t : ${topics}">
-
-<td th:text="${t.id}"></td>
-<td th:text="${t.topicName}"></td>
-<td th:text="${t.supervisorId}"></td>
-<td th:text="${t.topicType}"></td>
-
-<td>
-<a th:href="@{/topic/view/{id}(id=${t.id})}">view</a>
-</td>
-
-<td>
-<a th:href="@{/topic/new}">edit</a>
-</td>
-
-<td>
-<a th:href="@{/topic/delete/{id}(id=${t.id})}">delete</a>
-</td>
-
-</tr>
-
-</table>
-
-</div>
-
-</main>
-
-
-<footer>
-
-©2026 by <span th:text="${ten}">Student Name</span> – FIT.NTU
-
-</footer>
+    <footer>
+        ©2026 by <span th:text="${ten}">Student Name</span> – FIT.NTU
+    </footer>
 
 </body>
-
 </html>
