@@ -27,7 +27,7 @@ public class TopicController {
     @GetMapping("/all")
     public String topicList(Model model){
         model.addAttribute("topics", dsTopic);
-        return "topic-list";
+        return "index";
     }
 
     // Topic View

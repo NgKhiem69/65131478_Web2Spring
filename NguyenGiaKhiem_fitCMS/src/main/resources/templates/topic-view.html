@@ -2,23 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Topic Detail</title>
+<title>Topic View</title>
 </head>
+
 <body>
 
 <h2>Topic Detail</h2>
 
 <p>Id: <span th:text="${topic.id}"></span></p>
-
 <p>Name: <span th:text="${topic.topicName}"></span></p>
-
 <p>Description: <span th:text="${topic.topicDescription}"></span></p>
-
-<p>Supervisor Id: <span th:text="${topic.supervisorId}"></span></p>
-
-<p>Topic Type: <span th:text="${topic.topicType}"></span></p>
-
-<br>
+<p>Supervisor: <span th:text="${topic.supervisorId}"></span></p>
+<p>Type: <span th:text="${topic.topicType}"></span></p>
 
 <a href="/topic/all">Back</a>
 
