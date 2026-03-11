@@ -1,35 +1,93 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Add Topic</title>
+    <meta charset="UTF-8">
+    <title>Add Topic</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 0 auto; /* Căn giữa form */
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Giúp input không bị tràn viền */
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #1976d2; /* Trùng màu xanh với logo của bạn */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #115293;
+        }
+    </style>
 </head>
 <body>
 
-<h2>Add New Topic</h2>
+    <div class="form-container">
+        <h2>Add New Topic</h2>
+        <br>
 
-<form action="/topic/save" method="post">
+        <form th:action="@{/topic/save}" method="post">
 
-<p>Id</p>
-<input type="text" name="id">
+            <div class="form-group">
+                <label for="id">Id</label>
+                <input type="text" id="id" name="id" required>
+            </div>
 
-<p>Topic Name</p>
-<input type="text" name="topicName">
+            <div class="form-group">
+                <label for="topicName">Topic Name</label>
+                <input type="text" id="topicName" name="topicName" required>
+            </div>
 
-<p>Description</p>
-<input type="text" name="topicDescription">
+            <div class="form-group">
+                <label for="topicDescription">Description</label>
+                <input type="text" id="topicDescription" name="topicDescription">
+            </div>
 
-<p>Supervisor Id</p>
-<input type="text" name="supervisorId">
+            <div class="form-group">
+                <label for="supervisorId">Supervisor Id</label>
+                <input type="text" id="supervisorId" name="supervisorId">
+            </div>
 
-<p>Topic Type</p>
-<input type="text" name="topicType">
+            <div class="form-group">
+                <label for="topicType">Topic Type</label>
+                <input type="text" id="topicType" name="topicType">
+            </div>
 
-<br><br>
+            <br>
+            <div class="form-group">
+                <button type="submit">Save</button>
+            </div>
 
-<button type="submit">Save</button>
-
-</form>
+        </form>
+    </div>
 
 </body>
 </html>

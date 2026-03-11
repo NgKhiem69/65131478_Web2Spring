@@ -2,48 +2,46 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<div th:fragment="content">
+    <div th:fragment="content">
 
-<h2>Topic List</h2>
+        <h2>Topic List</h2>
+        <br>
+        <a th:href="@{/topic/new}">Add New Topic</a>
+        <br><br>
 
-<a href="/topic/new">Add New Topic</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Topic Name</th>
+                    <th>Supervisor Id</th>
+                    <th>Topic Type</th>
+                    <th>View</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="t : ${topics}">
+                    <td th:text="${t.id}"></td>
+                    <td th:text="${t.topicName}"></td>
+                    <td th:text="${t.supervisorId}"></td>
+                    <td th:text="${t.topicType}"></td>
+                    
+                    <td>
+                        <a th:href="@{/topic/view/{id}(id=${t.id})}">view</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/topic/edit/{id}(id=${t.id})}">edit</a> 
+                    </td>
+                    <td>
+                        <a th:href="@{/topic/delete/{id}(id=${t.id})}">delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-<table border="1">
-
-<tr>
-<th>Id</th>
-<th>topicName</th>
-<th>supervisorId</th>
-<th>topicType</th>
-<th>view</th>
-<th>edit</th>
-<th>delete</th>
-</tr>
-
-<tr th:each="t : ${topics}">
-
-<td th:text="${t.id}"></td>
-<td th:text="${t.topicName}"></td>
-<td th:text="${t.supervisorId}"></td>
-<td th:text="${t.topicType}"></td>
-
-<td>
-<a th:href="@{/topic/view/{id}(id=${t.id})}">view</a>
-</td>
-
-<td>
-<a th:href="@{/topic/new}">edit</a>
-</td>
-
-<td>
-<a th:href="@{/topic/delete/{id}(id=${t.id})}">delete</a>
-</td>
-
-</tr>
-
-</table>
-
-</div>
+    </div>
 
 </body>
 </html>
