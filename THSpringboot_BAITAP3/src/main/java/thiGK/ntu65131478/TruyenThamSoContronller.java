@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class TruyenThamSoContronller {
-	@GetMapping("/input")
+	@GetMapping("/vidu3")
 	public String showForm() {
 		return "inForm";
 	}

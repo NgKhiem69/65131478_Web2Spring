@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 
 @Controller
 public class SinhVienController {
-	@GetMapping("/")
+	@GetMapping("/vidu2")
 	public String sinhVienInfo(Model model) {
         model.addAttribute("mssv", "65131478");
         model.addAttribute("hoten", "Nguyễn Gia Khiêm");
