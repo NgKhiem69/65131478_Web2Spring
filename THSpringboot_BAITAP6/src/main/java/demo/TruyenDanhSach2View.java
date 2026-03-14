@@ -25,6 +25,6 @@ public class TruyenDanhSach2View {
 
 		model.addAttribute("dsSanPham", listSP);
 
-		return "vd6-danhsach-sanpham";
+		return "dsSanPham";
 	}
 }
