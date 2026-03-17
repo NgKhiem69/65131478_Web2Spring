@@ -2,7 +2,8 @@
 <html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>index</title>
+
     <style>
         * {
             box-sizing: border-box;
@@ -11,40 +12,45 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Segoe UI", Arial, sans-serif;
             display: grid;
             grid-template-areas:
                 "header header"
                 "sidebar content"
                 "footer footer";
-            grid-template-rows: 60px 1fr 40px;
-            grid-template-columns: 250px 1fr;
+            grid-template-rows: 70px 1fr 50px;
+            grid-template-columns: 240px 1fr;
             min-height: 100vh;
+            background: #f1f5f9;
         }
 
+        /* HEADER */
         header {
             grid-area: header;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #333;
-            padding: 0 20px;
+            padding: 0 25px;
+            background: linear-gradient(90deg, #1976d2, #42a5f5);
+            color: white;
         }
 
         .logo {
-            color: #d32f2f;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 16px;
         }
 
-        .logo span {
-            color: #1976d2;
-            font-size: 12px;
+        .user {
+            background: rgba(255,255,255,0.2);
+            padding: 6px 12px;
+            border-radius: 20px;
         }
 
+        /* SIDEBAR */
         aside {
             grid-area: sidebar;
-            border-right: 2px solid #333;
+            background: #1e293b;
+            color: white;
         }
 
         aside ul {
@@ -52,119 +58,172 @@
         }
 
         aside ul li {
-            border-bottom: 1px solid #333;
-            padding: 12px 15px;
+            border-bottom: 1px solid #334155;
         }
 
         aside a {
             text-decoration: none;
-            color: black;
+            color: #cbd5e1;
             display: block;
+            padding: 14px 18px;
+            transition: 0.3s;
         }
 
+        aside a:hover {
+            background: #334155;
+            color: white;
+            padding-left: 25px;
+        }
+
+        /* MAIN */
         main {
             grid-area: content;
-            background: #f5f5f5;
             padding: 30px;
-            display: flex;
-            justify-content: center;
         }
 
-        .cv-card {
+        .card {
             background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 700px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
         }
 
+        h2 {
+            margin-bottom: 15px;
+            color: #1e293b;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 14px;
+            background: #1976d2;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #125ea7;
+        }
+
+        /* TABLE */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px; /* Thêm chút khoảng cách ở trên bảng */
+            margin-top: 15px;
+        }
+
+        th {
+            background: #1976d2;
+            color: white;
         }
 
         th, td {
-            border: 1px solid #333;
-            padding: 8px;
+            padding: 10px;
             text-align: center;
         }
 
+        tr:nth-child(even) {
+            background: #f1f5f9;
+        }
+
+        tr:hover {
+            background: #e3f2fd;
+        }
+
+        /* ACTION BUTTON */
+        .action a {
+            padding: 5px 8px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .view { background: #22c55e; color: white; }
+        .edit { background: #f59e0b; color: white; }
+        .delete { background: #ef4444; color: white; }
+
+        /* FOOTER */
         footer {
             grid-area: footer;
-            border-top: 2px solid #333;
             display: flex;
             justify-content: center;
             align-items: center;
+            background: #1e293b;
+            color: white;
             font-size: 14px;
         }
     </style>
 </head>
+
 <body>
 
-    <header>
-        <div class="logo">
-            <span>TRƯỜNG ĐẠI HỌC NHA TRANG</span><br>
-            KHOA CÔNG NGHỆ THÔNG TIN
-        </div>
-        <div>
-            [<span th:text="${ten}">UserName</span>]
-        </div>
-    </header>
+<header>
+    <div class="logo">
+        ĐH NHA TRANG - CNTT
+    </div>
 
-    <aside>
-        <ul>
-            <li><a href="/">Dashboard</a></li>
-            <li><a href="/topic/all">Topic - List</a></li>
-            <li><a href="/topic/new">Topic - Addnew</a></li>
-            <li>Student - List</li>
-            <li>Student - Addnew</li>
-        </ul>
-    </aside>
+    <div class="user">
+        👤 <span th:text="${ten}">User</span>
+    </div>
+</header>
 
-    <main>
-        <div class="cv-card">
-            <h2>Topic List</h2>
-            <br>
-            <a th:href="@{/topic/new}">Add New Topic</a>
+<aside>
+    <ul>
+        <li><a href="/"> index</a></li>
+        <li><a href="/topic/all">📚 Topic List</a></li>
+        <li><a href="/topic/new">➕ Add Topic</a></li>
+        <li><a href="/student/all">👨‍🎓 Student List</a></li>
+        <li><a href="/student/new">➕ Add Student</a></li>
+    </ul>
+</aside>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Topic Name</th>
-                        <th>Supervisor Id</th>
-                        <th>Topic Type</th>
-                        <th>View</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="t : ${topics}">
-                        <td th:text="${t.id}"></td>
-                        <td th:text="${t.topicName}"></td>
-                        <td th:text="${t.supervisorId}"></td>
-                        <td th:text="${t.topicType}"></td>
-                        <td>
-                            <a th:href="@{/topic/view/{id}(id=${t.id})}">view</a>
-                        </td>
-                        <td>
-                            <a th:href="@{/topic/new}">edit</a>
-                        </td>
-                        <td>
-                            <a th:href="@{/topic/delete/{id}(id=${t.id})}">delete</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
+<main>
+    <div class="card">
+        <h2>📚 Topic List</h2>
 
-    <footer>
-        ©2026 by <span th:text="${ten}">Student Name</span> – FIT.NTU
-    </footer>
+        <a class="btn" th:href="@{/topic/new}">+ Add New Topic</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Topic Name</th>
+                    <th>Supervisor</th>
+                    <th>Type</th>
+                    <th colspan="3">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="t : ${topics}">
+                    <td th:text="${t.id}"></td>
+                    <td th:text="${t.topicName}"></td>
+                    <td th:text="${t.supervisorId}"></td>
+                    <td th:text="${t.topicType}"></td>
+
+                    <td class="action">
+                        <a class="view" th:href="@{/topic/view/{id}(id=${t.id})}">View</a>
+                    </td>
+
+                    <td class="action">
+                        <a class="edit" th:href="@{/topic/new}">Edit</a>
+                    </td>
+
+                    <td class="action">
+                        <a class="delete" th:href="@{/topic/delete/{id}(id=${t.id})}">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<footer>
+    ©2026 - FIT.NTU | <span th:text="${ten}">Student</span>
+</footer>
 
 </body>
 </html>
