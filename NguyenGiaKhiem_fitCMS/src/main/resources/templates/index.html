@@ -173,24 +173,28 @@
 <aside>
     <ul>
         
-        <li><a href="/topic/all">📚 Topic List</a></li>
-        <li><a href="/topic/new">➕ Add Topic</a></li>
-        <li><a href="/student/all">👨‍🎓 Student List</a></li>
-        <li><a href="/student/new">➕ Add Student</a></li>
+        <li><a href="/?page=topic">📚 Topic List</a></li>
+		<li><a href="/topic/new">➕ Add Topic</a></li>
+		<li><a href="/?page=student">👨‍🎓 Student List</a></li>
+		<li><a href="/student/new">➕ Add Student</a></li>
     </ul>
 </aside>
 
-<main>
-    <div class="card">
+
+    <main>
+<div class="card">
+
+    <!-- 🔵 TOPIC -->
+    <div th:if="${page == 'topic'}">
         <h2>📚 Topic List</h2>
 
-        <a class="btn" th:href="@{/topic/new}">+ Add New Topic</a>
+        <a class="btn" href="/topic/new">+ Add Topic</a>
 
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Topic Name</th>
+                    <th>Name</th>
                     <th>Supervisor</th>
                     <th>Type</th>
                     <th colspan="3">Action</th>
@@ -204,22 +208,48 @@
                     <td th:text="${t.supervisorId}"></td>
                     <td th:text="${t.topicType}"></td>
 
-                    <td class="action">
-                        <a class="view" th:href="@{/topic/view/{id}(id=${t.id})}">View</a>
-                    </td>
-
-                    <td class="action">
-                        <a class="edit" th:href="@{/topic/new}">Edit</a>
-                    </td>
-
-                    <td class="action">
-                        <a class="delete" th:href="@{/topic/delete/{id}(id=${t.id})}">Delete</a>
-                    </td>
+                    <td><a class="view" th:href="@{/?page=topic-view&id={id}(id=${t.id})}">View</a></td>
+                    <td><a class="edit" th:href="@{/topic/edit/{id}(id=${t.id})}">Edit</a></td>
+                    <td><a class="delete" th:href="@{/topic/delete/{id}(id=${t.id})}">Delete</a></td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+
+    <!-- 🟢 STUDENT -->
+    <div th:if="${page == 'student'}">
+        <h2>👨‍🎓 Student List</h2>
+
+        <a class="btn" href="/student/new">+ Add Student</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Group</th>
+                    <th colspan="3">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="s : ${students}">
+                    <td th:text="${s.id}"></td>
+                    <td th:text="${s.name}"></td>
+                    <td th:text="${s.groupId}"></td>
+
+                    <td><<a class="view" th:href="@{/?page=student-view&id={id}(id=${s.id})}">View</a></td>
+                    <td><a class="edit" th:href="@{/student/edit/{id}(id=${s.id})}">Edit</a></td>
+                    <td><a class="delete" th:href="@{/student/delete/{id}(id=${s.id})}">Delete</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
 </main>
+
 
 <footer>
     ©2026 - FIT.NTU | <span th:text="${ten}">Student</span>

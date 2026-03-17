@@ -3,12 +3,14 @@ package thiGK.ntu65131478;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import thiGK.ntu65131478.model.Student;
 
-@RestController
-@RequestMapping("/api/student")
+@Controller
+@RequestMapping("/student")
 public class studentController {
 
     public static List<Student> students = new ArrayList<>();
@@ -19,48 +21,60 @@ public class studentController {
         students.add(new Student(3, "Le Van C", 2));
     }
 
-    // 🔹 GET ALL
+    // 🔹 LIST
     @GetMapping("/all")
-    public List<Student> getAllStudents() {
-        return students;
+    public String getAllStudents(Model model) {
+        model.addAttribute("students", students);
+        return "student-list";
     }
 
-    @GetMapping("/{id}")
-    public Student getStudentById(@PathVariable int id) {
+    // 🔹 VIEW
+    @GetMapping("/view/{id}")
+    public String viewStudent(@PathVariable int id, Model model) {
         for (Student s : students) {
             if (s.getId() == id) {
-                return s;
+                model.addAttribute("student", s);
+                break;
             }
         }
-        return null;
+        return "student-view";
     }
 
-    @PostMapping("/add")
-    public Student addStudent(@RequestBody Student s) {
+    // 🔹 NEW (FORM)
+    @GetMapping("/new")
+    public String newStudent(Model model) {
+        model.addAttribute("student", new Student());
+        return "student-new";
+    }
+
+    // 🔹 EDIT (FORM)
+    @GetMapping("/edit/{id}")
+    public String editStudent(@PathVariable int id, Model model) {
+        for (Student s : students) {
+            if (s.getId() == id) {
+                model.addAttribute("student", s);
+                break;
+            }
+        }
+        return "student-edit";
+    }
+
+    // 🔹 SAVE (ADD + UPDATE)
+    @PostMapping("/save")
+    public String saveStudent(@ModelAttribute Student s) {
+
+        // nếu trùng id → update
+        students.removeIf(st -> st.getId() == s.getId());
+
         students.add(s);
-        return s;
+
+        return "redirect:/student/all";
     }
 
-    @PutMapping("/edit/{id}")
-    public Student editStudent(@PathVariable int id, @RequestBody Student newS) {
-        for (Student s : students) {
-            if (s.getId() == id) {
-                s.setName(newS.getName());
-                s.setGroupId(newS.getGroupId());
-                return s;
-            }
-        }
-        return null;
-    }
-
-    @DeleteMapping("/delete/{id}")
+    // 🔹 DELETE
+    @GetMapping("/delete/{id}")
     public String deleteStudent(@PathVariable int id) {
-        boolean isRemoved = students.removeIf(s -> s.getId() == id);
-
-        if (isRemoved) {
-            return "Đã xóa Student ID: " + id;
-        } else {
-            return "Không tìm thấy Student ID: " + id;
-        }
+        students.removeIf(s -> s.getId() == id);
+        return "redirect:/student/all";
     }
 }
