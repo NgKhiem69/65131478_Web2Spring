@@ -1,92 +1,83 @@
 <!DOCTYPE html>
-<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Add Topic</title>
-    
+
     <style>
         body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background-color: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f1f5f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-        .form-container {
+
+        .card {
             background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            margin: 0 auto; /* Căn giữa form */
+            padding: 30px 40px;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+
+        .card h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
             color: #333;
+            text-align: center;
         }
-        input[type="text"] {
+
+        input {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
+            margin: 8px 0 15px 0;
             border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box; /* Giúp input không bị tràn viền */
+            border-radius: 5px;
+            box-sizing: border-box; /* Giúp padding không làm tăng tổng chiều rộng */
         }
+
+        input:focus {
+            border-color: #1976d2;
+            outline: none;
+        }
+
         button {
-            padding: 10px 20px;
-            background-color: #1976d2; /* Trùng màu xanh với logo của bạn */
+            width: 100%;
+            padding: 12px;
+            background: #1976d2;
             color: white;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            border-radius: 5px;
             font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
         }
+
         button:hover {
-            background-color: #115293;
+            background: #1565c0;
         }
     </style>
 </head>
+
 <body>
 
-    <div class="form-container">
-        <h2>Add New Topic</h2>
-        <br>
+    <div class="card">
+        <h2>Add Topic</h2>
 
         <form th:action="@{/topic/save}" method="post">
+            <input type="text" name="id" placeholder="ID" required>
+            <input type="text" name="topicName" placeholder="Topic Name" required>
+            <input type="text" name="topicDescription" placeholder="Description">
+            <input type="text" name="supervisorId" placeholder="Supervisor ID">
+            <input type="text" name="topicType" placeholder="Type">
 
-            <div class="form-group">
-                <label for="id">Id</label>
-                <input type="text" id="id" name="id" required>
-            </div>
-
-            <div class="form-group">
-                <label for="topicName">Topic Name</label>
-                <input type="text" id="topicName" name="topicName" required>
-            </div>
-
-            <div class="form-group">
-                <label for="topicDescription">Description</label>
-                <input type="text" id="topicDescription" name="topicDescription">
-            </div>
-
-            <div class="form-group">
-                <label for="supervisorId">Supervisor Id</label>
-                <input type="text" id="supervisorId" name="supervisorId">
-            </div>
-
-            <div class="form-group">
-                <label for="topicType">Topic Type</label>
-                <input type="text" id="topicType" name="topicType">
-            </div>
-
-            <br>
-            <div class="form-group">
-                <button type="submit">Save</button>
-            </div>
-
+            <button type="submit">Save</button>
         </form>
+
     </div>
 
 </body>
