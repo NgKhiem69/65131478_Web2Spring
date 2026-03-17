@@ -1,71 +1,60 @@
 package thiGK.ntu65131478;
 
-
 import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import thiGK.ntu65131478.model.Topic;
 
-@Controller
-@RequestMapping("/topic")
+@RestController
+@RequestMapping("/api/topic")
 public class TopicController {
 
-    ArrayList<Topic> dsTopic = new ArrayList<>();
+    public static List<Topic> topics = new ArrayList<>();
 
     public TopicController() {
-
-        dsTopic.add(new Topic(1,"Web bán hàng","Website bán hàng",101,"Đồ án"));
-        dsTopic.add(new Topic(2,"Quản lý sinh viên","QL sinh viên",102,"Đề tài"));
-        dsTopic.add(new Topic(3,"Website tin tức","Trang tin",103,"Project"));
-
+        topics.add(new Topic(1, "Web bán hàng", "Website bán hàng", 101, "Đồ án"));
+        topics.add(new Topic(2, "Quản lý sinh viên", "QL sinh viên", 102, "Đề tài"));
+        topics.add(new Topic(3, "Website tin tức", "Trang tin", 103, "Project"));
     }
 
-    // Topic List
+    // 🔹 GET ALL
     @GetMapping("/all")
-    public String topicList(Model model){
-        model.addAttribute("topics", dsTopic);
-        return "index";
+    public List<Topic> getAllTopics() {
+        return topics;
     }
 
-    // Topic View
-    @GetMapping("/view/{id}")
-    public String viewTopic(@PathVariable int id, Model model){
+    // 🔹 ADD
+    @PostMapping("/add")
+    public Topic addTopic(@RequestBody Topic t) {
+        topics.add(t);
+        return t;
+    }
 
-        for(Topic t : dsTopic){
-            if(t.getId()==id){
-                model.addAttribute("topic", t);
+    // 🔹 EDIT
+    @PutMapping("/edit/{id}")
+    public Topic editTopic(@PathVariable("id") int id, @RequestBody Topic newT) {
+        for (Topic t : topics) {
+            if (t.getId() == id) {
+                t.setTopicName(newT.getTopicName());
+                t.setTopicDescription(newT.getTopicDescription());
+                t.setSupervisorId(newT.getSupervisorId());
+                t.setTopicType(newT.getTopicType());
+                return t;
             }
         }
-
-        return "topic-view";
+        return null;
     }
 
-    // Topic Add Form
-    @GetMapping("/new")
-    public String newTopic(Model model){
-        model.addAttribute("topic", new Topic());
-        return "topic-new";
+    // 🔹 DELETE
+    @DeleteMapping("/delete/{id}")
+    public String deleteTopic(@PathVariable("id") int id) {
+        boolean isRemoved = topics.removeIf(t -> t.getId() == id);
+        if (isRemoved) {
+            return "Đã xóa Topic ID: " + id;
+        } else {
+            return "Không tìm thấy Topic ID: " + id;
+        }
     }
-
-    // Save Topic
-    @PostMapping("/save")
-    public String saveTopic(@ModelAttribute Topic t){
-
-        dsTopic.add(t);
-
-        return "redirect:/topic/all";
-    }
-
-    // Delete Topic
-    @GetMapping("/delete/{id}")
-    public String deleteTopic(@PathVariable int id){
-
-        dsTopic.removeIf(t -> t.getId()==id);
-
-        return "redirect:/topic/all";
-    }
-
 }
