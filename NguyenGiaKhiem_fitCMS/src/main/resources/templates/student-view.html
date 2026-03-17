@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Student</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f1f5f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #333;
+            text-align: center;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin: 12px 0;
+            color: #475569;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between; /* Đẩy tiêu đề và nội dung ra 2 bên */
+            border-bottom: 1px dashed #e2e8f0; /* Đường kẻ mờ phân cách */
+            padding-bottom: 8px;
+        }
+
+        p:last-of-type {
+            border-bottom: none; /* Bỏ đường kẻ ở mục cuối cùng */
+        }
+
+        b {
+            color: #1e293b;
+        }
+
+        .btn-back {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            background: #1976d2;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .btn-back:hover {
+            background: #1565c0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h2>Student Detail</h2>
+
+        <p><b>ID:</b> <span th:text="${student.id}"></span></p>
+        <p><b>Name:</b> <span th:text="${student.name}"></span></p>
+        <p><b>Group:</b> <span th:text="${student.groupId}"></span></p>
+
+        <a class="btn-back" th:href="@{/student/all}">Back to List</a>
