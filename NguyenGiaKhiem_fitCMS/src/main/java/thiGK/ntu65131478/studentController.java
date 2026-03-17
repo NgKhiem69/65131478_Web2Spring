@@ -13,7 +13,7 @@ public class studentController {
 
     public static List<Student> students = new ArrayList<>();
 
-    public studentController() {
+    static {
         students.add(new Student(1, "Nguyen Van A", 1));
         students.add(new Student(2, "Tran Thi B", 1));
         students.add(new Student(3, "Le Van C", 2));
@@ -25,16 +25,24 @@ public class studentController {
         return students;
     }
 
-    // 🔹 ADD
+    @GetMapping("/{id}")
+    public Student getStudentById(@PathVariable int id) {
+        for (Student s : students) {
+            if (s.getId() == id) {
+                return s;
+            }
+        }
+        return null;
+    }
+
     @PostMapping("/add")
     public Student addStudent(@RequestBody Student s) {
         students.add(s);
         return s;
     }
 
-    // 🔹 EDIT
     @PutMapping("/edit/{id}")
-    public Student editStudent(@PathVariable("id") int id, @RequestBody Student newS) {
+    public Student editStudent(@PathVariable int id, @RequestBody Student newS) {
         for (Student s : students) {
             if (s.getId() == id) {
                 s.setName(newS.getName());
@@ -45,10 +53,10 @@ public class studentController {
         return null;
     }
 
-    // 🔹 DELETE
     @DeleteMapping("/delete/{id}")
-    public String deleteStudent(@PathVariable("id") int id) {
+    public String deleteStudent(@PathVariable int id) {
         boolean isRemoved = students.removeIf(s -> s.getId() == id);
+
         if (isRemoved) {
             return "Đã xóa Student ID: " + id;
         } else {

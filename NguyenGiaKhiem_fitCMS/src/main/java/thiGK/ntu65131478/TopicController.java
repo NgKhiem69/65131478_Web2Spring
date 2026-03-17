@@ -22,14 +22,14 @@ public class TopicController {
         }
     }
 
-    // 🔹 LIST
+   
     @GetMapping("/all")
     public String topicList(Model model){
         model.addAttribute("topics", topics);
-        return "topic-list"; // ⚠️ phải đúng tên file HTML
+        return "topic-list";
     }
 
-    // 🔹 VIEW
+   
     @GetMapping("/view/{id}")
     public String view(@PathVariable int id, Model model){
         for(Topic t : topics){
@@ -40,14 +40,14 @@ public class TopicController {
         return "topic-view";
     }
 
-    // 🔹 NEW
+
     @GetMapping("/new")
     public String add(Model model){
         model.addAttribute("topic", new Topic());
         return "topic-new";
     }
 
-    // 🔹 EDIT
+
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable int id, Model model){
         for(Topic t : topics){
@@ -58,7 +58,7 @@ public class TopicController {
         return "topic-edit";
     }
 
-    // 🔹 SAVE (ADD + EDIT)
+
     @PostMapping("/save")
     public String save(@ModelAttribute Topic newT){
 
@@ -81,7 +81,6 @@ public class TopicController {
         return "redirect:/topic/all";
     }
 
-    // 🔹 DELETE
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable int id){
         topics.removeIf(t -> t.getId()==id);
