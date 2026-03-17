@@ -9,7 +9,11 @@ public class HomeContronller {
 
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("ten", "khiêm"); // tên hiển thị
-        return "index"; // trả về index.html
+        model.addAttribute("ten", "Khiêm tới chơi nè bro");
+
+        
+        model.addAttribute("topics", TopicController.topics);
+
+        return "index";
     }
 }
