@@ -1,47 +1,155 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Topic List</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            display: grid; 
+            grid-template-areas: 
+                "h h" 
+                "s c" 
+                "f f"; 
+            grid-template-columns: 220px 1fr; 
+            min-height: 100vh; 
+            background: #f1f5f9;
+            margin: 0;
+        }
+        
+        header {
+            grid-area: h; 
+            background: #1976d2; 
+            color: white; 
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        aside {
+            grid-area: s; 
+            background: #1e293b;
+        }
+        
+        aside a {
+            display: block;
+            color: #cbd5e1;
+            padding: 12px 20px;
+            text-decoration: none;
+        }
+        
+        aside a:hover {
+            background: #334155;
+            color: white;
+        }
+        
+        main {
+            grid-area: c;
+            padding: 30px;
+        }
+        
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th {
+            background: #1976d2;
+            color: white;
+        }
+        
+        td, th {
+            padding: 12px 10px;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        .btn {
+            background: #1976d2;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .view { background: #16a34a; } /* Màu xanh lá dịu hơn */
+        .edit { background: #f59e0b; } /* Màu cam dịu hơn */
+        .delete { background: #dc2626; } /* Màu đỏ dịu hơn */
+        
+        footer {
+            grid-area: f;
+            text-align: center;
+            padding: 15px;
+            background: #1e293b;
+            color: white;
+        }
+    </style>
+</head>
+
 <body>
 
-    <div th:fragment="content">
+    <header>📚 Topic Management</header>
 
-        <h2>Topic List</h2>
-        <br>
-        <a th:href="@{/topic/new}">Add New Topic</a>
-        <br><br>
+    <aside>
+        <a href="/topic/all">Topic List</a>
+        <a href="/topic/new">Add Topic</a>
+    </aside>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Topic Name</th>
-                    <th>Supervisor Id</th>
-                    <th>Topic Type</th>
-                    <th>View</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="t : ${topics}">
-                    <td th:text="${t.id}"></td>
-                    <td th:text="${t.topicName}"></td>
-                    <td th:text="${t.supervisorId}"></td>
-                    <td th:text="${t.topicType}"></td>
-                    
-                    <td>
-                        <a th:href="@{/topic/view/{id}(id=${t.id})}">view</a>
-                    </td>
-                    <td>
-                        <a th:href="@{/topic/edit/{id}(id=${t.id})}">edit</a> 
-                    </td>
-                    <td>
-                        <a th:href="@{/topic/delete/{id}(id=${t.id})}">delete</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <main>
+        <div class="card">
+            <h2>Topic List</h2>
+            <a class="btn" href="/topic/new">+ Add</a>
 
-    </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Supervisor</th>
+                        <th>Type</th>
+                        <th colspan="3">Action</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr th:each="t : ${topics}">
+                        <td th:text="${t.id}"></td>
+                        <td th:text="${t.topicName}"></td>
+                        <td th:text="${t.supervisorId}"></td>
+                        <td th:text="${t.topicType}"></td>
+
+                        <td>
+                            <a class="btn view" th:href="@{/topic/view/{id}(id=${t.id})}">View</a>
+                        </td>
+                        <td>
+                            <a class="btn edit" th:href="@{/topic/edit/{id}(id=${t.id})}">Edit</a>
+                        </td>
+                        <td>
+                            <a class="btn delete" th:href="@{/topic/delete/{id}(id=${t.id})}">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        ©2026 FIT.NTU
+    </footer>
 
 </body>
 </html>
