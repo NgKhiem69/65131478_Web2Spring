@@ -1,98 +1,86 @@
 <!DOCTYPE html>
-<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Topic View</title>
+    <title>View Topic</title>
 
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            padding: 30px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f1f5f9;
             display: flex;
             justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
 
-        .detail-card {
+        .card {
             background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
+            padding: 30px 40px;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        h2 {
+        .card h2 {
+            margin-top: 0;
             color: #333;
-            border-bottom: 2px solid #1976d2; /* Đường viền xanh làm điểm nhấn */
-            padding-bottom: 10px;
+            text-align: center;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 15px;
             margin-bottom: 20px;
         }
 
-        .detail-row {
-            margin-bottom: 15px;
+        p {
+            margin: 12px 0;
+            color: #475569;
             font-size: 16px;
+            display: flex;
+            justify-content: space-between; /* Đẩy tiêu đề và nội dung ra 2 bên */
+            border-bottom: 1px dashed #e2e8f0; /* Thêm dòng kẻ mờ phân cách */
+            padding-bottom: 8px;
+        }
+        
+        p:last-of-type {
+            border-bottom: none; /* Bỏ dòng kẻ ở mục cuối cùng */
         }
 
-        .detail-label {
-            font-weight: bold;
-            color: #555;
-            display: inline-block;
-            width: 120px; /* Cố định chiều rộng để cột thông tin thẳng hàng nhau */
-        }
-
-        .detail-value {
-            color: #000;
+        b {
+            color: #1e293b;
         }
 
         .btn-back {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #757575;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.3s;
+            display: block;
             text-align: center;
+            margin-top: 25px;
+            background: #1976d2;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
         }
 
         .btn-back:hover {
-            background-color: #616161;
+            background: #1565c0;
         }
     </style>
 </head>
+
 <body>
 
-    <div class="detail-card">
+    <div class="card">
         <h2>Topic Detail</h2>
 
-        <div class="detail-row">
-            <span class="detail-label">Id:</span>
-            <span class="detail-value" th:text="${topic.id}"></span>
-        </div>
+        <p><b>ID:</b> <span th:text="${topic.id}"></span></p>
+        <p><b>Name:</b> <span th:text="${topic.topicName}"></span></p>
+        <p><b>Description:</b> <span th:text="${topic.topicDescription}"></span></p>
+        <p><b>Supervisor:</b> <span th:text="${topic.supervisorId}"></span></p>
+        <p><b>Type:</b> <span th:text="${topic.topicType}"></span></p>
 
-        <div class="detail-row">
-            <span class="detail-label">Name:</span>
-            <span class="detail-value" th:text="${topic.topicName}"></span>
-        </div>
-
-        <div class="detail-row">
-            <span class="detail-label">Description:</span>
-            <span class="detail-value" th:text="${topic.topicDescription}"></span>
-        </div>
-
-        <div class="detail-row">
-            <span class="detail-label">Supervisor:</span>
-            <span class="detail-value" th:text="${topic.supervisorId}"></span>
-        </div>
-
-        <div class="detail-row">
-            <span class="detail-label">Type:</span>
-            <span class="detail-value" th:text="${topic.topicType}"></span>
-        </div>
-
-        <a th:href="@{/topic/all}" class="btn-back">Quay lại (Back)</a>
+        <a class="btn-back" th:href="@{/topic/all}">Back to List</a>
     </div>
 
 </body>
