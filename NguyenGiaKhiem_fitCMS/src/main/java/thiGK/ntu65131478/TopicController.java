@@ -1,89 +1,75 @@
 package thiGK.ntu65131478;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import thiGK.ntu65131478.model.Topic;
 
-@Controller
-@RequestMapping("/topic")
+@RestController
+@RequestMapping("/api/topic")
 public class TopicController {
 
-    public static ArrayList<Topic> topics = new ArrayList<>();
+    public static List<Topic> topics = new ArrayList<>();
 
-    public TopicController() {
-        if(topics.isEmpty()){
-            topics.add(new Topic(1, "Web bán hàng", "Website bán hàng", 101, "Đồ án"));
-            topics.add(new Topic(2, "Quản lý sinh viên", "QL sinh viên", 102, "Đề tài"));
-            topics.add(new Topic(3, "Website tin tức", "Trang tin", 103, "Project"));
-        }
+    static {
+        topics.add(new Topic(1, "Web bán hàng", "Website bán hàng", 101, "Đồ án"));
+        topics.add(new Topic(2, "Quản lý sinh viên", "QL sinh viên", 102, "Đề tài"));
+        topics.add(new Topic(3, "Website tin tức", "Trang tin", 103, "Project"));
     }
 
-   
+    // 🔹 GET ALL
     @GetMapping("/all")
-    public String topicList(Model model){
-        model.addAttribute("topics", topics);
-        return "topic-list";
+    public List<Topic> getAllTopics(){
+        return topics;
     }
 
-   
-    @GetMapping("/view/{id}")
-    public String view(@PathVariable int id, Model model){
+    // 🔹 GET BY ID
+    @GetMapping("/{id}")
+    public Topic getTopicById(@PathVariable int id){
         for(Topic t : topics){
-            if(t.getId()==id){
-                model.addAttribute("topic", t);
+            if(t.getId() == id){
+                return t;
             }
         }
-        return "topic-view";
+        return null;
     }
 
-
-    @GetMapping("/new")
-    public String add(Model model){
-        model.addAttribute("topic", new Topic());
-        return "topic-new";
+    // 🔹 ADD
+    @PostMapping("/add")
+    public Topic addTopic(@RequestBody Topic newT){
+        topics.add(newT);
+        return newT;
     }
 
-
-    @GetMapping("/edit/{id}")
-    public String edit(@PathVariable int id, Model model){
-        for(Topic t : topics){
-            if(t.getId()==id){
-                model.addAttribute("topic", t);
-            }
-        }
-        return "topic-edit";
-    }
-
-
-    @PostMapping("/save")
-    public String save(@ModelAttribute Topic newT){
-
-        boolean found = false;
+    // 🔹 EDIT
+    @PutMapping("/edit/{id}")
+    public Topic editTopic(@PathVariable int id, @RequestBody Topic newT){
 
         for(Topic t : topics){
-            if(t.getId() == newT.getId()){
+            if(t.getId() == id){
                 t.setTopicName(newT.getTopicName());
                 t.setTopicDescription(newT.getTopicDescription());
                 t.setSupervisorId(newT.getSupervisorId());
                 t.setTopicType(newT.getTopicType());
-                found = true;
+                return t;
             }
         }
 
-        if(!found){
-            topics.add(newT);
-        }
-
-        return "redirect:/topic/all";
+        return null;
     }
 
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable int id){
-        topics.removeIf(t -> t.getId()==id);
-        return "redirect:/topic/all";
+    // 🔹 DELETE
+    @DeleteMapping("/delete/{id}")
+    public String deleteTopic(@PathVariable int id){
+
+        boolean removed = topics.removeIf(t -> t.getId() == id);
+
+        if(removed){
+            return "Deleted Topic ID: " + id;
+        }
+
+        return "Topic not found";
     }
 }

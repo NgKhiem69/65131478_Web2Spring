@@ -2,9 +2,10 @@
 <html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>index</title>
+    <title>FIT.NTU Dashboard</title>
 
     <style>
+        /* RESET & BASE */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -12,16 +13,17 @@
         }
 
         body {
-            font-family: "Segoe UI", Arial, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             display: grid;
             grid-template-areas:
                 "header header"
                 "sidebar content"
                 "footer footer";
             grid-template-rows: 70px 1fr 50px;
-            grid-template-columns: 240px 1fr;
+            grid-template-columns: 260px 1fr;
             min-height: 100vh;
-            background: #f1f5f9;
+            background: #f8fafc; /* Màu nền xám xanh siêu nhạt của Tailwind */
+            color: #334155;
         }
 
         /* HEADER */
@@ -30,120 +32,168 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 25px;
-            background: linear-gradient(90deg, #1976d2, #42a5f5);
+            padding: 0 30px;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6); /* Gradient xanh lam đậm chất tech */
             color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 10;
         }
 
         .logo {
-            font-weight: bold;
-            font-size: 16px;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .user {
-            background: rgba(255,255,255,0.2);
-            padding: 6px 12px;
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 14px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         /* SIDEBAR */
         aside {
             grid-area: sidebar;
-            background: #1e293b;
+            background: #0f172a; /* Nền xanh đen sâu thẳm */
             color: white;
+            padding-top: 20px;
         }
 
         aside ul {
             list-style: none;
         }
 
-        aside ul li {
-            border-bottom: 1px solid #334155;
-        }
-
         aside a {
             text-decoration: none;
-            color: #cbd5e1;
-            display: block;
-            padding: 14px 18px;
-            transition: 0.3s;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 25px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
         }
 
         aside a:hover {
-            background: #334155;
-            color: white;
-            padding-left: 25px;
+            background: #1e293b;
+            color: #fff;
+            border-left: 3px solid #3b82f6; /* Vạch sáng bên trái khi hover */
+            padding-left: 30px;
         }
 
-        /* MAIN */
+        /* MAIN CONTENT */
         main {
             grid-area: content;
-            padding: 30px;
+            padding: 35px 40px;
         }
 
         .card {
             background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
         }
 
         h2 {
-            margin-bottom: 15px;
-            color: #1e293b;
+            color: #0f172a;
+            font-size: 22px;
+            font-weight: 600;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 8px 14px;
-            background: #1976d2;
+        .btn-add {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: #3b82f6;
             color: white;
-            border-radius: 6px;
+            border-radius: 8px;
             text-decoration: none;
-            margin-bottom: 10px;
-            transition: 0.3s;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.25);
         }
 
-        .btn:hover {
-            background: #125ea7;
+        .btn-add:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(59, 130, 246, 0.3);
         }
 
-        /* TABLE */
+        /* TABLE STYLING - MODERN LOOK */
         table {
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
         }
 
         th {
-            background: #1976d2;
-            color: white;
+            background: #f8fafc;
+            color: #64748b;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 16px 15px;
+            border-bottom: 1px solid #e2e8f0;
         }
 
-        th, td {
-            padding: 10px;
+        td {
+            padding: 16px 15px;
             text-align: center;
+            border-bottom: 1px solid #f1f5f9;
+            color: #475569;
+            font-size: 14px;
+            vertical-align: middle;
         }
 
-        tr:nth-child(even) {
-            background: #f1f5f9;
+        tr:last-child td {
+            border-bottom: none;
         }
 
-        tr:hover {
-            background: #e3f2fd;
+        tr:hover td {
+            background: #f8fafc;
         }
 
-        /* ACTION BUTTON */
-        .action a {
-            padding: 5px 8px;
-            border-radius: 5px;
+        /* ACTION BADGES */
+        .action-btn {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 6px;
             text-decoration: none;
             font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
         }
 
-        .view { background: #22c55e; color: white; }
-        .edit { background: #f59e0b; color: white; }
-        .delete { background: #ef4444; color: white; }
+        .view { background: #ecfdf5; color: #059669; }
+        .view:hover { background: #d1fae5; }
+        
+        .edit { background: #fffbeb; color: #d97706; }
+        .edit:hover { background: #fef3c7; }
+        
+        .delete { background: #fef2f2; color: #dc2626; }
+        .delete:hover { background: #fee2e2; }
 
         /* FOOTER */
         footer {
@@ -151,9 +201,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #1e293b;
-            color: white;
-            font-size: 14px;
+            background: white;
+            color: #64748b;
+            font-size: 13px;
+            border-top: 1px solid #e2e8f0;
         }
     </style>
 </head>
@@ -162,97 +213,98 @@
 
 <header>
     <div class="logo">
-        ĐH NHA TRANG - CNTT
+        🎓 ĐH NHA TRANG - CNTT
     </div>
 
     <div class="user">
-        👤 <span th:text="${ten}">User</span>
+        👋 Xin chào, <span th:text="${ten}">User</span>
     </div>
 </header>
 
 <aside>
     <ul>
-        
         <li><a href="/?page=topic">📚 Topic List</a></li>
-		<li><a href="/topic/new">➕ Add Topic</a></li>
-		<li><a href="/?page=student">👨‍🎓 Student List</a></li>
-		<li><a href="/student/new">➕ Add Student</a></li>
+        <li><a href="/topic/new">➕ Add Topic</a></li>
+        <li><a href="/?page=student">👨‍🎓 Student List</a></li>
+        <li><a href="/student/new">➕ Add Student</a></li>
     </ul>
 </aside>
 
+<main>
+    <div class="card">
 
-    <main>
-<div class="card">
+        <div th:if="${page == 'topic'}">
+            <div class="card-header">
+                <h2>📚 Danh sách Đề tài (Topics)</h2>
+                <a class="btn-add" href="/topic/new">➕ Add New Topic</a>
+            </div>
 
-    <!-- 🔵 TOPIC -->
-    <div th:if="${page == 'topic'}">
-        <h2>📚 Topic List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Supervisor</th>
+                        <th>Type</th>
+                        <th colspan="3">Actions</th>
+                    </tr>
+                </thead>
 
-        <a class="btn" href="/topic/new">+ Add Topic</a>
+                <tbody>
+                    <tr th:each="t : ${topics}">
+                        <td th:text="${t.id}"></td>
+                        <td th:text="${t.topicName}" style="text-align: left; font-weight: 500; color: #0f172a;"></td>
+                        <td th:text="${t.supervisorId}"></td>
+                        <td><span style="background: #f1f5f9; padding: 4px 10px; border-radius: 20px; font-size: 12px; color: #475569;" th:text="${t.topicType}"></span></td>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Supervisor</th>
-                    <th>Type</th>
-                    <th colspan="3">Action</th>
-                </tr>
-            </thead>
+                        <td style="width: 80px;"><a class="action-btn view" th:href="@{/topic/view/{id}(id=${t.id})}">View</a></td>
+                        <td style="width: 80px;"><a class="action-btn edit" th:href="@{/topic/edit/{id}(id=${t.id})}">Edit</a></td>
+                        <td style="width: 80px;"><a class="action-btn delete" th:href="@{/topic/delete/{id}(id=${t.id})}">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-            <tbody>
-                <tr th:each="t : ${topics}">
-                    <td th:text="${t.id}"></td>
-                    <td th:text="${t.topicName}"></td>
-                    <td th:text="${t.supervisorId}"></td>
-                    <td th:text="${t.topicType}"></td>
+        <div th:if="${page == 'student'}">
+            <div class="card-header">
+                <h2>👨‍🎓 Danh sách Sinh viên</h2>
+                <a class="btn-add" href="/student/new">➕ Add New Student</a>
+            </div>
 
-                    <td><a class="view" th:href="@{/?page=topic-view&id={id}(id=${t.id})}">View</a></td>
-                    <td><a class="edit" th:href="@{/topic/edit/{id}(id=${t.id})}">Edit</a></td>
-                    <td><a class="delete" th:href="@{/topic/delete/{id}(id=${t.id})}">Delete</a></td>
-                </tr>
-            </tbody>
-        </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Group</th>
+                        <th colspan="3">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="s : ${students}">
+                        <td th:text="${s.id}"></td>
+                        <td th:text="${s.name}" style="text-align: left; font-weight: 500; color: #0f172a;"></td>
+                        <td th:text="${s.groupId}"></td>
+
+                        <td style="width: 80px;"><a class="action-btn view" th:href="@{/student/view/{id}(id=${s.id})}">View</a></td>
+                        <td style="width: 80px;"><a class="action-btn edit" th:href="@{/student/edit/{id}(id=${s.id})}">Edit</a></td>
+                        <td style="width: 80px;"><a class="action-btn delete" th:href="@{/student/delete/{id}(id=${s.id})}">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div th:if="${page == null}" style="text-align: center; padding: 40px 0; color: #64748b;">
+            <h2 style="font-size: 28px; margin-bottom: 10px;">Chào mừng đến với Hệ thống Quản lý</h2>
+            <p>Vui lòng chọn danh mục quản lý từ menu bên trái.</p>
+        </div>
+
     </div>
-
-
-    <!-- 🟢 STUDENT -->
-    <div th:if="${page == 'student'}">
-        <h2>👨‍🎓 Student List</h2>
-
-        <a class="btn" href="/student/new">+ Add Student</a>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Group</th>
-                    <th colspan="3">Action</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr th:each="s : ${students}">
-                    <td th:text="${s.id}"></td>
-                    <td th:text="${s.name}"></td>
-                    <td th:text="${s.groupId}"></td>
-
-                    <td><<a class="view" th:href="@{/?page=student-view&id={id}(id=${s.id})}">View</a></td>
-                    <td><a class="edit" th:href="@{/student/edit/{id}(id=${s.id})}">Edit</a></td>
-                    <td><a class="delete" th:href="@{/student/delete/{id}(id=${s.id})}">Delete</a></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-</div>
 </main>
 
-
 <footer>
-    ©2026 - FIT.NTU | <span th:text="${ten}">Student</span>
+    © 2026 - Khoa Công nghệ Thông tin | Đại học Nha Trang | Thực hiện bởi: <strong style="margin-left: 5px;" th:text="${ten}">Student</strong>
 </footer>
 
 </body>
