@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import model.Page;
-import model.Post;
-import repository.PageRepository;
-import repository.PostRepository;
+import demo.model.Page;
+import demo.model.Post;
+import demo.repository.PageRepository;
+import demo.repository.PostRepository;
 
 @Component
 public class DataSeeder implements CommandLineRunner {

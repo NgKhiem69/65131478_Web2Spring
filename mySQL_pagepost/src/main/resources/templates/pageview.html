@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::main})}">
+<head>
+    <title>Chi tiết Page</title>
+</head>
+<body>
+    <main>
+        <h2>Chi tiết Page</h2>
+        <div th:if="${page != null}">
+            <p><strong>ID:</strong> <span th:text="${page.id}"></span></p>
+            <p><strong>Tên trang:</strong> <span th:text="${page.pageName}"></span></p>
+            <p><strong>Từ khóa:</strong> <span th:text="${page.keyword}"></span></p>
+            <p><strong>Nội dung:</strong></p>
+            <div th:text="${page.content}" style="border:1px solid #ccc; padding:10px;"></div>
+        </div>
+        <br>
+        <a th:href="@{/page/all}">Quay lại danh sách</a>
+    </main>
+</body>
+</html>

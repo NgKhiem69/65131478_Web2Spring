@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::main})}">
+<head>
+    <title>Thêm mới Post</title>
+</head>
+<body>
+    <main>
+        <h2>Thêm mới Post</h2>
+        <form th:action="@{/post/save}" th:object="${post}" method="post">
+            <p>Tiêu đề (Title): <input type="text" th:field="*{title}" required/></p>
+            <p>ID Danh mục (Category ID): <input type="number" th:field="*{categoryId}"/></p>
+            <p>Nội dung (Content):<br>
+                <textarea th:field="*{content}" rows="6" cols="60"></textarea>
+            </p>
+            <button type="submit">Lưu bài viết</button>
+        </form>
+    </main>
+</body>
+</html>

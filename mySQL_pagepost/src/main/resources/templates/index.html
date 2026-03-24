@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-      layout:decorate="~{layout}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::main})}">
 <head>
     <title>Dashboard - CV Sinh viên</title>
 </head>
 <body>
-    <div layout:fragment="content">
+    
+    <main>
         <h2>Curriculum Vitae</h2>
         <p><strong>Họ và tên:</strong> Nam</p>
         <p><strong>Chuyên ngành:</strong> Công nghệ Thông tin</p>
         <p><strong>Mục tiêu:</strong> Trở thành lập trình viên giỏi chuyên môn & đạt IELTS 8.0.</p>
+        
         <h3>Dự án tiêu biểu:</h3>
         <ul>
             <li>Ứng dụng trắc nghiệm tiếng Anh</li>
             <li>Nền tảng số hỗ trợ nền du lịch tỉnh Khánh Hòa</li>
         </ul>
-    </div>
+    </main>
+
 </body>
 </html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::main})}">
+<head>
+    <title>Thêm mới Page</title>
+</head>
+<body>
+    
+    <main>
+        <h2>Thêm mới Page</h2>
+        <form th:action="@{/page/save}" th:object="${page}" method="post">
+            <p>Tên trang (PageName): <input type="text" th:field="*{pageName}" required/></p>
+            <p>Từ khóa (Keyword): <input type="text" th:field="*{keyword}"/></p>
+            <p>ID Trang cha (Parent ID): <input type="number" th:field="*{parentPageId}"/></p>
+            <p>Nội dung (Content):<br>
+                <textarea th:field="*{content}" rows="5" cols="50"></textarea>
+            </p>
+            <button type="submit">Lưu dữ liệu</button>
+        </form>
+    </main>
+
+</body>
+</html>

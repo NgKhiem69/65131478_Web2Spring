@@ -1,11 +1,12 @@
-package controller;
+package demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import model.Page;
-import repository.PageRepository;
+
+import demo.model.Page;
+import demo.repository.PageRepository;
 
 @Controller
 @RequestMapping("/page")
@@ -18,13 +19,20 @@ public class PageController {
     @GetMapping("/all")
     public String listPages(Model model) {
         model.addAttribute("pages", pageRepository.findAll());
-        return "page/list"; 
+        return "pagelist"; 
     }
 
     @GetMapping("/new")
     public String showAddForm(Model model) {
         model.addAttribute("page", new Page());
-        return "page/add"; 
+        return "pageadd"; 
+    }
+
+    @GetMapping("/view/{id}")
+    public String viewPage(@PathVariable("id") Long id, Model model) {
+        Page page = pageRepository.findById(id).orElse(null);
+        model.addAttribute("page", page);
+        return "pageview"; 
     }
 
     @PostMapping("/save")

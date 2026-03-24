@@ -1,11 +1,12 @@
-package controller;
+package demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import model.Post;
-import repository.PostRepository;
+
+import demo.model.Post;
+import demo.repository.PostRepository;
 
 @Controller
 @RequestMapping("/post")
@@ -17,13 +18,20 @@ public class PostController {
     @GetMapping("/all")
     public String listPosts(Model model) {
         model.addAttribute("posts", postRepository.findAll());
-        return "post/list"; 
+        return "postlist"; 
     }
 
     @GetMapping("/new")
     public String showAddForm(Model model) {
         model.addAttribute("post", new Post());
-        return "post/add"; 
+        return "postadd"; 
+    }
+
+    @GetMapping("/view/{id}")
+    public String viewPost(@PathVariable("id") Long id, Model model) {
+        Post post = postRepository.findById(id).orElse(null);
+        model.addAttribute("post", post);
+        return "postview"; 
     }
 
     @PostMapping("/save")
@@ -32,12 +40,6 @@ public class PostController {
         return "redirect:/post/all";
     }
 
-    @GetMapping("/view/{id}")
-    public String viewPost(@PathVariable("id") Long id, Model model) {
-        Post post = postRepository.findById(id).orElse(null);
-        model.addAttribute("post", post);
-        return "post/view";
-    }
    
     @GetMapping("/delete/{id}")
     public String deletePost(@PathVariable("id") Long id) {
