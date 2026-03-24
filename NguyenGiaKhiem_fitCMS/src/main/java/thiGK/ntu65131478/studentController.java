@@ -1,75 +1,94 @@
 package thiGK.ntu65131478;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import thiGK.ntu65131478.model.Student;
+import repository.MockData;
 
-@RestController
-@RequestMapping("/api/student")
+@Controller
+@RequestMapping("/student")
 public class studentController {
 
-    public static List<Student> students = new ArrayList<>();
-
-    static {
-        students.add(new Student(1, "Nguyen Van A", 1));
-        students.add(new Student(2, "Tran Thi B", 1));
-        students.add(new Student(3, "Le Van C", 2));
-    }
-
-    // 🔹 GET ALL
+    // 🔹 LIST
     @GetMapping("/all")
-    public List<Student> getAllStudents() {
-        return students;
-    }
-
-    // 🔹 GET BY ID
-    @GetMapping("/{id}")
-    public Student getStudentById(@PathVariable int id) {
-
-        for (Student s : students) {
-            if (s.getId() == id) {
-                return s;
-            }
-        }
-
-        return null;
-    }
-
-    // 🔹 ADD
-    @PostMapping("/add")
-    public Student addStudent(@RequestBody Student s) {
-        students.add(s);
-        return s;
-    }
-
-    // 🔹 EDIT
-    @PutMapping("/edit/{id}")
-    public Student editStudent(@PathVariable int id, @RequestBody Student newS) {
-
-        for (Student s : students) {
-            if (s.getId() == id) {
-                s.setName(newS.getName());
-                s.setGroupId(newS.getGroupId());
-                return s;
-            }
-        }
-
-        return null;
+    public String listStudents(ModelMap model) {
+        model.addAttribute("students", MockData.students);
+        return "student-list";
     }
 
     // 🔹 DELETE
-    @DeleteMapping("/delete/{id}")
-    public String deleteStudent(@PathVariable int id) {
+    @GetMapping("/delete/{id}")
+    public String deleteStudent(@PathVariable("id") int id) {
+        MockData.students.removeIf(s -> s.getId() == id);
+        return "redirect:/student/all";
+    }
 
-        boolean removed = students.removeIf(s -> s.getId() == id);
+    // 🔹 NEW FORM
+    @GetMapping("/new")
+    public String showNewStudentForm() {
+        return "student-new";
+    }
 
-        if (removed) {
-            return "Deleted Student ID: " + id;
+    // 🔹 ADD
+    @PostMapping("/new")
+    public String addNewStudent(
+            @RequestParam("id") int id,
+            @RequestParam("name") String name,
+            @RequestParam("groupId") int groupId
+    ) {
+
+        Student s = new Student(id, name, groupId);
+        MockData.students.add(s);
+
+        return "redirect:/student/all";
+    }
+
+    // 🔹 VIEW
+    @GetMapping("/view/{id}")
+    public String viewStudent(@PathVariable("id") int id, ModelMap model) {
+
+        Student student = MockData.students.stream()
+                .filter(s -> s.getId() == id)
+                .findFirst()
+                .orElse(null);
+
+        model.addAttribute("student", student);
+
+        return "student-view";
+    }
+
+    // 🔹 EDIT FORM
+    @GetMapping("/edit/{id}")
+    public String showEditStudentForm(@PathVariable("id") int id, ModelMap model) {
+
+        Student student = MockData.students.stream()
+                .filter(s -> s.getId() == id)
+                .findFirst()
+                .orElse(null);
+
+        model.addAttribute("student", student);
+
+        return "student-edit";
+    }
+
+    // 🔹 UPDATE
+    @PostMapping("/edit")
+    public String editStudent(
+            @RequestParam("id") int id,
+            @RequestParam("name") String name,
+            @RequestParam("groupId") int groupId
+    ) {
+
+        for (Student s : MockData.students) {
+            if (s.getId() == id) {
+                s.setName(name);
+                s.setGroupId(groupId);
+                break;
+            }
         }
 
-        return "Student not found";
+        return "redirect:/student/all";
     }
 }

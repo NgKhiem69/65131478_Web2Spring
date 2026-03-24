@@ -1,75 +1,100 @@
 package thiGK.ntu65131478;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import thiGK.ntu65131478.model.Topic;
+import repository.MockData;
 
-@RestController
-@RequestMapping("/api/topic")
+@Controller
+@RequestMapping("/topic")
 public class TopicController {
 
-    public static List<Topic> topics = new ArrayList<>();
-
-    static {
-        topics.add(new Topic(1, "Web bán hàng", "Website bán hàng", 101, "Đồ án"));
-        topics.add(new Topic(2, "Quản lý sinh viên", "QL sinh viên", 102, "Đề tài"));
-        topics.add(new Topic(3, "Website tin tức", "Trang tin", 103, "Project"));
-    }
-
-    // 🔹 GET ALL
+    // 🔹 LIST
     @GetMapping("/all")
-    public List<Topic> getAllTopics(){
-        return topics;
-    }
-
-    // 🔹 GET BY ID
-    @GetMapping("/{id}")
-    public Topic getTopicById(@PathVariable int id){
-        for(Topic t : topics){
-            if(t.getId() == id){
-                return t;
-            }
-        }
-        return null;
-    }
-
-    // 🔹 ADD
-    @PostMapping("/add")
-    public Topic addTopic(@RequestBody Topic newT){
-        topics.add(newT);
-        return newT;
-    }
-
-    // 🔹 EDIT
-    @PutMapping("/edit/{id}")
-    public Topic editTopic(@PathVariable int id, @RequestBody Topic newT){
-
-        for(Topic t : topics){
-            if(t.getId() == id){
-                t.setTopicName(newT.getTopicName());
-                t.setTopicDescription(newT.getTopicDescription());
-                t.setSupervisorId(newT.getSupervisorId());
-                t.setTopicType(newT.getTopicType());
-                return t;
-            }
-        }
-
-        return null;
+    public String listTopics(ModelMap model) {
+        model.addAttribute("topics", MockData.topics);
+        return "topic-list";
     }
 
     // 🔹 DELETE
-    @DeleteMapping("/delete/{id}")
-    public String deleteTopic(@PathVariable int id){
+    @GetMapping("/delete/{id}")
+    public String deleteTopic(@PathVariable("id") int id) {
+        MockData.topics.removeIf(t -> t.getId() == id);
+        return "redirect:/topic/all";
+    }
 
-        boolean removed = topics.removeIf(t -> t.getId() == id);
+    // 🔹 NEW FORM
+    @GetMapping("/new")
+    public String showNewForm() {
+        return "topic-new";
+    }
 
-        if(removed){
-            return "Deleted Topic ID: " + id;
+    // 🔹 ADD
+    @PostMapping("/new")
+    public String addTopic(
+            @RequestParam("id") int id,
+            @RequestParam("topicName") String topicName,
+            @RequestParam("topicDescription") String topicDescription,
+            @RequestParam("supervisorId") int supervisorId,
+            @RequestParam("topicType") String topicType
+    ) {
+
+        Topic t = new Topic(id, topicName, topicDescription, supervisorId, topicType);
+        MockData.topics.add(t);
+
+        return "redirect:/topic/all";
+    }
+
+    // 🔹 VIEW
+    @GetMapping("/view/{id}")
+    public String viewTopic(@PathVariable("id") int id, ModelMap model) {
+
+        Topic topic = MockData.topics.stream()
+                .filter(t -> t.getId() == id)
+                .findFirst()
+                .orElse(null);
+
+        model.addAttribute("topic", topic);
+
+        return "topic-view";
+    }
+
+    // 🔹 EDIT FORM
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable("id") int id, ModelMap model) {
+
+        Topic topic = MockData.topics.stream()
+                .filter(t -> t.getId() == id)
+                .findFirst()
+                .orElse(null);
+
+        model.addAttribute("topic", topic);
+
+        return "topic-edit";
+    }
+
+    // 🔹 UPDATE
+    @PostMapping("/edit")
+    public String editTopic(
+            @RequestParam("id") int id,
+            @RequestParam("topicName") String topicName,
+            @RequestParam("topicDescription") String topicDescription,
+            @RequestParam("supervisorId") int supervisorId,
+            @RequestParam("topicType") String topicType
+    ) {
+
+        for (Topic t : MockData.topics) {
+            if (t.getId() == id) {
+                t.setTopicName(topicName);
+                t.setTopicDescription(topicDescription);
+                t.setSupervisorId(supervisorId);
+                t.setTopicType(topicType);
+                break;
+            }
         }
 
-        return "Topic not found";
+        return "redirect:/topic/all";
     }
 }

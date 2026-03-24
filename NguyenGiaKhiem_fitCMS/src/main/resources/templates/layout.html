@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(content)">
+<head>
+    <meta charset="UTF-8">
+    <title>Hệ thống Quản trị</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            border-bottom: 2px solid #ccc;
+            background: #f5f5f5;
+        }
+
+        .logo {
+            font-weight: bold;
+            color: #d32f2f;
+            line-height: 1.4;
+        }
+
+        .user-info {
+            font-weight: 500;
+        }
+
+        /* BODY */
+        .main-container {
+            display: flex;
+            flex: 1;
+        }
+
+        /* SIDEBAR */
+        aside {
+            width: 220px;
+            border-right: 2px solid #ccc;
+            padding: 10px;
+            background: #fafafa;
+        }
+
+        aside ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        aside ul li {
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            transition: 0.2s;
+        }
+
+        aside ul li:hover {
+            background: #e3f2fd;
+        }
+
+        aside ul li a {
+            text-decoration: none;
+            color: black;
+            display: block;
+            padding: 8px;
+        }
+
+        /* CONTENT */
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 10px;
+            border-top: 2px solid #ccc;
+            background: #eee;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        TRƯỜNG ĐẠI HỌC NHA TRANG<br>
+        KHOA CÔNG NGHỆ THÔNG TIN
+    </div>
+
+    <div class="user-info">
+        👋 <span th:text="${ten}">User</span>
+    </div>
+</header>
+
+<div class="main-container">
+
+    <aside>
+        <ul>
+            <li><strong><a th:href="@{/}">🏠 Dashboard</a></strong></li>
+
+      
+            <li><a th:href="@{/topic/all}">📚 Topic</a></li>
+            <li><a th:href="@{/topic/new}">➕ Page - Add</a></li>
+            
+            <li><a th:href="@{/student/all}">👨‍🎓 Student</a></li>
+            <li><a th:href="@{/student/new}">➕ Post - Add</a></li>
+        </ul>
+    </aside>
+
+    <!-- 👇 QUAN TRỌNG -->
+    <main>
+        <div th:replace="${content}"></div>
+    </main>
+
+</div>
+
+<footer>
+    ©2026 - FIT.NTU
+</footer>
+
+</body>
+</html>

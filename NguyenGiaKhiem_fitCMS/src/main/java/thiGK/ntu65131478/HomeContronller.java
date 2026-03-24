@@ -2,23 +2,23 @@ package thiGK.ntu65131478;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import repository.MockData;
 
 @Controller
 public class HomeContronller {
 
     @GetMapping("/")
-    public String home(@RequestParam(value = "page", required = false, defaultValue = "topic") String page,
-                       Model model) {
+    public String home(Model model) {
 
-        model.addAttribute("ten", "khiem tới chơi nè bro");
+        model.addAttribute("ten", "khiem");
 
+        // ⚠️ QUAN TRỌNG
+        model.addAttribute("topics", MockData.topics);
+        model.addAttribute("students", MockData.students);
 
-        model.addAttribute("topics", TopicController.topics);
-        model.addAttribute("students", studentController.students);
-
-
-        model.addAttribute("page", page);
+        model.addAttribute("page", "topic");
 
         return "index";
     }
