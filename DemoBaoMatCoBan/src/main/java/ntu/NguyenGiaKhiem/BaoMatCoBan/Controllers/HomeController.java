@@ -10,4 +10,13 @@ public class HomeController {
 	public String index() {
 		return "HomePage";
 	}
+	@GetMapping("/admincp/")
+	public String indexAd() {
+		return "indexAdmin";
+	}
+	
+	@GetMapping("/products/")
+	public String indexUs() {
+		return "indexUser";
+	}
 }
