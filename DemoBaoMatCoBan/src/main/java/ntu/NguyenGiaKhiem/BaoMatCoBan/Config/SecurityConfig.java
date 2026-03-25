@@ -21,11 +21,15 @@ public class SecurityConfig {
                 .requestMatchers("/admin/**").hasRole("ADMIN")   // Cần role ADMIN
                 .anyRequest().authenticated()                  // Các request còn lại cần auth
             )
+//            .formLogin(form -> form
+//                .loginPage("/login")          // Tùy chỉnh trang login
+//                .permitAll()                  // Cho phép ai cũng xem trang login
+//                .defaultSuccessUrl("/products", true)
+//            )
             .formLogin(form -> form
-                .loginPage("/login")          // Tùy chỉnh trang login
-                .permitAll()                  // Cho phép ai cũng xem trang login
-                .defaultSuccessUrl("/products", true)
-            )
+            	    .loginPage("/login")
+            	    .permitAll()
+            	)
             .logout(logout -> logout
                 .permitAll()
                 .logoutSuccessUrl("/login?logout")
