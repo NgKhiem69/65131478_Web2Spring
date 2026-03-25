@@ -19,4 +19,8 @@ public class HomeController {
 	public String indexUs() {
 		return "indexUser";
 	}
+	@GetMapping("/login/")
+	public String login() {
+		return "login";
+	}
 }
