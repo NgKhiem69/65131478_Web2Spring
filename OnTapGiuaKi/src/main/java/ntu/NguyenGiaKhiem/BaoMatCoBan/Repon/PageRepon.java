@@ -1,5 +1,8 @@
 package ntu.NguyenGiaKhiem.BaoMatCoBan.Repon;
 
-public class PageRepon {
+import org.springframework.data.jpa.repository.JpaRepository;
 
+import ntu.NguyenGiaKhiem.BaoMatCoBan.Model.Page;
+
+public interface PageRepon extends JpaRepository<Page, Long> {
 }
