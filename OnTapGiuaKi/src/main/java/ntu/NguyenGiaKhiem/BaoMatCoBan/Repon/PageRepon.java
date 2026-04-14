@@ -1,5 +1,5 @@
 package ntu.NguyenGiaKhiem.BaoMatCoBan.Repon;
 
-public class TopicRepository {
+public class PageRepon {
 
 }
