@@ -17,11 +17,13 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String handleLogin(@RequestParam String username, @RequestParam String password, HttpSession session) {
+    public String handleLogin(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
         if (tinService.login(username, password) != null) {
             session.setAttribute("user", username);
-            return "redirect:/tin";
+            return "redirect:/tin"; 
         }
-        return "login";
+        model.addAttribute("error", "Sai tên đăng nhập hoặc mật khẩu!");
+        return "login"; 
     }
+}
 }
